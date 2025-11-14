@@ -1,4 +1,4 @@
-// GIỚI THIỆU ỨNG DỤNG VMP
+# GIỚI THIỆU ỨNG DỤNG VMP
 
 Hiểu theo góc nhìn người dùng, ứng dụng VMP là một trình phát nhạc cá nhân, giúp bạn quản lý, nghe, và sắp xếp những file mà bạn tự tải về — gọn gàng, tiện lợi. Dưới đây là cách trình bày lại toàn bộ chức năng, theo trải nghiệm người dùng thực tế:
 
@@ -9,8 +9,8 @@ Với nhạc: Tên file, thời lượng.
 
 📚 2. Thư viện & bộ sưu tập
 Tất cả file nhạc bạn thêm vào sẽ hiển thị trong thư viện chung.
-Bạn có thể tạo bộ sưu tập (giống playlist hoặc album riêng) để gom nhạc theo chủ đề: ví dụ “Nhạc chill buổi sáng”, “Workout”, “Lofi ngủ ngon”.
-Mỗi file (nhạc) có thể nằm trong nhiều bộ sưu tập khác nhau.
+Bạn có thể tạo bộ sưu tập để gom nhạc theo chủ đề: ví dụ “Nhạc chill buổi sáng”, “Workout”, “Lofi ngủ ngon”.
+Mỗi file có thể nằm trong nhiều bộ sưu tập khác nhau.
 Có thể sắp xếp danh sách theo: thời gian thêm, tên file, hoặc thứ tự tự đặt.
 
 ▶️ 3. Phát nhạc & điều khiển
