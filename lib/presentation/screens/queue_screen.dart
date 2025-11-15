@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:reorderables/reorderables.dart';
 import 'package:vmp_music/presentation/providers/queue_provider.dart';
 import 'package:vmp_music/presentation/widgets/index.dart';
 
@@ -113,22 +114,66 @@ class _QueueScreenState extends ConsumerState<QueueScreen> {
             padding: EdgeInsets.symmetric(horizontal: 16),
             child: Divider(),
           ),
-        // Upcoming songs
+        // Upcoming songs - Reorderable list
         Expanded(
-          child: ListView.builder(
-            itemCount: state.queue.length,
-            itemBuilder: (context, index) {
-              final music = state.queue[index];
-              final isCurrentIndex = index == state.currentIndex;
+          child: ReorderableColumn(
+            children: List.generate(
+              state.queue.length,
+              (index) {
+                final music = state.queue[index];
+                final isCurrentIndex = index == state.currentIndex;
 
-              return CompactMusicTile(
-                music: music,
-                index: index,
-                onTap: () {
-                  // Jump to song in queue
-                  ref.read(queueProvider.notifier).jumpToIndex(index);
-                },
-              );
+                return Padding(
+                  key: ValueKey(music.id),
+                  padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 4),
+                  child: Container(
+                    decoration: BoxDecoration(
+                      color: isCurrentIndex
+                          ? Theme.of(context).colorScheme.primaryContainer
+                          : null,
+                      borderRadius: BorderRadius.circular(8),
+                    ),
+                    child: Row(
+                      children: [
+                        // Drag handle
+                        ReorderableDelayedDragStartListener(
+                          index: index,
+                          child: const Padding(
+                            padding: EdgeInsets.all(8.0),
+                            child: Icon(Icons.drag_handle, size: 20),
+                          ),
+                        ),
+                        // Music tile
+                        Expanded(
+                          child: CompactMusicTile(
+                            music: music,
+                            index: index,
+                            onTap: () {
+                              ref
+                                  .read(queueProvider.notifier)
+                                  .jumpToIndex(index);
+                            },
+                          ),
+                        ),
+                        // Remove button
+                        IconButton(
+                          icon: const Icon(Icons.close, size: 20),
+                          onPressed: () {
+                            ref
+                                .read(queueProvider.notifier)
+                                .removeFromQueue(index);
+                          },
+                          constraints: const BoxConstraints(),
+                          padding: const EdgeInsets.all(8),
+                        ),
+                      ],
+                    ),
+                  ),
+                );
+              },
+            ),
+            onReorder: (oldIndex, newIndex) {
+              ref.read(queueProvider.notifier).reorderQueue(oldIndex, newIndex);
             },
           ),
         ),

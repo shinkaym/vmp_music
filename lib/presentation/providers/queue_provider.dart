@@ -215,6 +215,13 @@ class QueueNotifier extends StateNotifier<QueueState> {
     }
   }
 
+  /// Load queue from storage
+  Future<void> loadQueue() async {
+    state = state.copyWith(isLoading: true, error: null);
+    // TODO: Implement queue loading from QueueManager when phase 11 is complete
+    state = state.copyWith(isLoading: false);
+  }
+
   /// Clear all errors
   void clearError() {
     state = state.copyWith(error: null);
