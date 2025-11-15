@@ -9,3 +9,9 @@ export 'error/index.dart';
 
 // Localization
 export 'localization/index.dart';
+
+// Audio Services
+export 'audio/index.dart';
+
+// File & Permission Services
+export 'services/index.dart';
